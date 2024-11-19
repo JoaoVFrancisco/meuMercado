@@ -28,7 +28,7 @@ const Login = () => {
         </FloatingLabel>
 
         {/* Botão para enviar o formulário */}
-        <Button variant="primary" className="mt-4">Login</Button>
+        <Button variant="primary" className="mt-4" size="lg" href="/home">Login</Button>
       </Container>
     </div>
   );
