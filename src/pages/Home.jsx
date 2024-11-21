@@ -2,6 +2,9 @@ import React from "react";
 import CardProduto from "../components/CardProduto";
 import Container from "react-bootstrap/esm/Container";
 
+// importação de compontentes
+import NavBarra from "../components/NavBarra";
+
 const Home = () => {
   const produtos = [
     {
@@ -27,7 +30,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -36,7 +39,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -45,7 +48,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -54,7 +57,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -63,7 +66,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -72,7 +75,7 @@ const Home = () => {
       nome: "Carro Uno",
       descricao: "Meio de locomoção",
       preco: 100000.0,
-      categoria: "Automovél",
+      categoria: "Brinquedos e jogos",
       imagemUrl:
         "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
     },
@@ -80,6 +83,7 @@ const Home = () => {
 
   return (
     <div>
+      <NavBarra />
       <h1> Lista de Produtos </h1>
       <Container>
       <div className="lista-produtos d-flex col-12 gap-2 mt-3 justify-content-center flex-wrap">
