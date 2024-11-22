@@ -6,7 +6,10 @@ import Button from "react-bootstrap/Button";
 
 // importar o hook useState para monitorar a mudança das variaveis
 import { useState } from "react";
-import { Alert } from "bootstrap";
+import  Alert  from "react-bootstrap/Alert";
+
+// importação do Navigate
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
   //Variaveis pra guardar as informações digitadas pelo usúario
@@ -17,6 +20,57 @@ const Login = () => {
   const [alertClass, setAlertClass] = useState("mb-3 d-none")
   const [alertMensagem, setAlertMensagem] = useState("")
   const [alertVariant, setAlertVariant] = useState("danger")
+
+  // lista de Usuarios
+  const usuarios = [
+    { id: 1, nome: "João", email:"joaov@gmail.com", senha: "11" },
+    { id: 2, nome: "Gregory", email:"gregory@gmail.com", senha:"61" }
+  ]
+
+  // Criando o navigate
+  const navigate = useNavigate()
+
+  // Função pra guarda na memória do navegador as informações do usuário
+  const graverLocalStorage =(usuario) => {
+    localStorage.setItem("userName", usuario.nome)
+    localStorage.setItem("email", usuario.email)
+  }
+
+  // Função para tratar os dados do Login
+  const handleLogin = async (e) => {
+    // Previne a página de ser recarregada
+    e.preventDefault()
+
+    // Verifica se há aquele usuário digitados na lista
+    const userToFind = usuarios.find(
+      (user) => user.email == email
+  )
+
+    if(email != ""){
+      if (senha != ""){
+        if(userToFind != undefined && userToFind.senha == senha){
+          graverLocalStorage(userToFind)
+          setAlertClass("mb-3 mt-2")
+          setAlertVariant("success")
+          setAlertMensagem("login efetuado com sucesso")
+          alert("login efetuado com sucesso")
+          navigate("/home")
+        }
+        else{
+          setAlertClass("mb-3 mt-2")
+      setAlertMensagem("Usuário ou senha inválidos")
+        }
+      }
+      else{
+        setAlertClass("mb-3 mt-2")
+      setAlertMensagem("O campo senha não pode ser vazio")
+      }
+    }
+    else{
+      setAlertClass("mb-3 mt-2")
+      setAlertMensagem("O campo email não pode ser vazio")
+    }
+  }
 
   return (
     <div>
@@ -31,6 +85,7 @@ const Login = () => {
         >
           login
         </span>
+        <Form style={{width: "75%", margin: "auto"}} onSubmit ={handleLogin} >
         {/* Caixinha de email */}
         <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
           <Form.Control
@@ -59,9 +114,10 @@ const Login = () => {
           </Alert>
 
         {/* Botão para enviar o formulário */}
-        <Button variant="primary" className="mt-4" size="lg" href="/home">
+        <Button variant="primary" type="submit" className="mt-4" size="lg">
           Login
         </Button>
+        </Form>
       </Container>
     </div>
   );
