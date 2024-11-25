@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import  Alert  from "react-bootstrap/Alert";
-import usuarios from "../data/db.json"
 
 // importar o hook useState para monitorar a mudança das variaveis
 import { useState, useEffect } from "react";
@@ -25,16 +24,16 @@ const Login = () => {
   const [alertVariant, setAlertVariant] = useState("danger")
 
   // lista de Usuarios
-  const usuarios = [
-    
-  ]
+  const [usuarios, setUsuarios] = useState([])
+  
   // useEffect pra puxar os dados da api
   useEffect(() =>{
     async function fetchData(){
       try{
         const req = await fetch(url)
-        const users = await req.json()
+        const uses = await req.json()
         console.log(users)
+        setUsuarios(users)
       }
       catch(erro){
         console.log(erro.message)

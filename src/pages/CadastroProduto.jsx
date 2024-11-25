@@ -10,22 +10,33 @@ import Image from "react-bootstrap/Image";
 
 // importação de compontentes
 import NavBarra from "../components/NavBarra";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // importação do Navigate
 import { useNavigate } from "react-router-dom";
 
+const url = "http://localhost:5000/cats"
+
 const CadastroProduto = () => {
   // lista de categorias
-  const cats = [
-    { id: 1, nome: "Eletrônicos" },
-    { id: 2, nome: "Moda e Vestuario" },
-    { id: 3, nome: "Alimentos e Bebidas" },
-    { id: 4, nome: "Esportes e lazer" },
-    { id: 5, nome: "Brinquedos e jogos" },
-    { id: 6, nome: "Livros" },
-    { id: 7, nome: "Saúde e Beleza" },
-  ];
+  const [cats, setCategorias] = useState([]);
+
+  // useEffect pra puxar os dados da api
+  useEffect(() =>{
+    async function fetchData(){
+      try{
+        const req = await fetch(url)
+        const cats = await req.json()
+        console.log(cats)
+        setCategorias(cats)
+      }
+      catch(erro){
+        console.log(erro.message)
+      }
+    }
+    fetchData()
+  }, [])
+
 
   //   link produto sem imagem
   const linkImagem =
@@ -112,9 +123,9 @@ const CadastroProduto = () => {
               <Form.Group controlId="formGridTipo" className="mb-3">
                 <Form.Label>Tipo de produto</Form.Label>
                 <Form.Select>
-                  {cats.map((cat) => (
-                    <option key={cat.id} value={cat.nome}>
-                      {cat.nome}
+                  {cats.map((cats) => (
+                    <option key={cats.id} value={cats.nome}>
+                      {cats.nome}
                     </option>
                   ))}
                 </Form.Select>

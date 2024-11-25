@@ -5,81 +5,28 @@ import Container from "react-bootstrap/esm/Container";
 // importação de compontentes
 import NavBarra from "../components/NavBarra";
 
+// importar o hook useState para monitorar a mudança das variaveis
+import { useState, useEffect } from "react";
+
+const url = "http://localhost:5000/produtos"
+
 const Home = () => {
-  const produtos = [
-    {
-      id: 1,
-      nome: "Shampoo Cr7",
-      descricao: "Melhor Shampoo do mundo",
-      preco: 7.77,
-      categoria: "Saúde e beleza",
-      imagemUrl:
-        "https:images-americanas.b2w.io/produtos/2473557992/imagens/shampoo-anticaspa-clear-men-sports-limpeza-profunda-200ml/2473557992_2_large.jpg",
-    },
-    {
-      id: 2,
-      nome: "Pizza",
-      descricao: "Pizza (comida italiana",
-      preco: 19.99,
-      categoria: "Comida",
-      imagemUrl:
-        "https:catupiry.com.br/wp-content/uploads/2021/06/pizza_pepperoni.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-    {
-      id: 3,
-      nome: "Carro Uno",
-      descricao: "Meio de locomoção",
-      preco: 100000.0,
-      categoria: "Brinquedos e jogos",
-      imagemUrl:
-        "https:fotos-jornaldocarro-estadao.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2020/11/04233232/19843457-1160x774.jpg",
-    },
-  ];
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() =>{
+    async function fetchData(){
+      try{
+        const req = await fetch(url)
+        const prods = await req.json()
+        console.log(prods)
+        setProdutos(prods)
+      }
+      catch(erro){
+        console.log(erro.message)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <div>
