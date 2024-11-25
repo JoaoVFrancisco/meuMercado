@@ -3,13 +3,16 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import  Alert  from "react-bootstrap/Alert";
+import usuarios from "../data/db.json"
 
 // importar o hook useState para monitorar a mudança das variaveis
-import { useState } from "react";
-import  Alert  from "react-bootstrap/Alert";
+import { useState, useEffect } from "react";
 
 // importação do Navigate
 import {useNavigate} from "react-router-dom"
+
+const url = "http://localhost:5000/usuarios"
 
 const Login = () => {
   //Variaveis pra guardar as informações digitadas pelo usúario
@@ -23,9 +26,22 @@ const Login = () => {
 
   // lista de Usuarios
   const usuarios = [
-    { id: 1, nome: "João", email:"joaov@gmail.com", senha: "11" },
-    { id: 2, nome: "Gregory", email:"gregory@gmail.com", senha:"61" }
+    
   ]
+  // useEffect pra puxar os dados da api
+  useEffect(() =>{
+    async function fetchData(){
+      try{
+        const req = await fetch(url)
+        const users = await req.json()
+        console.log(users)
+      }
+      catch(erro){
+        console.log(erro.message)
+      }
+    }
+    fetchData()
+  }, [])
 
   // Criando o navigate
   const navigate = useNavigate()
