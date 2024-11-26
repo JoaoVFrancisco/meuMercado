@@ -32,7 +32,7 @@ const NavBarra = () => {
             {/* Sair */}
             <Nav className="justify-content-end">
               <Navbar.Text style={{color: "white" }}>Usuário:{usuarioNome}</Navbar.Text>
-              <Nav.Link href="/login">Sair</Nav.Link>
+              <Nav.Link href="/login" >Sair</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

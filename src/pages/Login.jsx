@@ -14,6 +14,10 @@ import {useNavigate} from "react-router-dom"
 const url = "http://localhost:5000/usuarios"
 
 const Login = () => {
+  // Resetar localStorage
+  localStorage.removeItem("userName")
+  localStorage.removeItem("email")
+
   //Variaveis pra guardar as informações digitadas pelo usúario
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -31,7 +35,7 @@ const Login = () => {
     async function fetchData(){
       try{
         const req = await fetch(url)
-        const uses = await req.json()
+        const users = await req.json()
         console.log(users)
         setUsuarios(users)
       }

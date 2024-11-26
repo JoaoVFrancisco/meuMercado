@@ -15,28 +15,27 @@ import { useState, useEffect } from "react";
 // importação do Navigate
 import { useNavigate } from "react-router-dom";
 
-const url = "http://localhost:5000/cats"
+const url = "http://localhost:5000/cats";
+const urlProds = "http://localhost:5000/produtos";
 
 const CadastroProduto = () => {
   // lista de categorias
   const [cats, setCategorias] = useState([]);
 
   // useEffect pra puxar os dados da api
-  useEffect(() =>{
-    async function fetchData(){
-      try{
-        const req = await fetch(url)
-        const cats = await req.json()
-        console.log(cats)
-        setCategorias(cats)
-      }
-      catch(erro){
-        console.log(erro.message)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(url);
+        const cats = await req.json();
+        console.log(cats);
+        setCategorias(cats);
+      } catch (erro) {
+        console.log(erro.message);
       }
     }
-    fetchData()
-  }, [])
-
+    fetchData();
+  }, []);
 
   //   link produto sem imagem
   const linkImagem =
@@ -44,9 +43,9 @@ const CadastroProduto = () => {
 
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState("Eletrônicos");
   const [preco, setPreco] = useState("");
-  const [imagem, setImagem] = useState("");
+  const [imagemUrl, setImagemUrl] = useState("");
 
   // Variaveis para alerta
   const [alertClass, setAlertClass] = useState("mb-3 d-none");
@@ -63,13 +62,24 @@ const CadastroProduto = () => {
     if (nome != "") {
       if (descricao != "") {
         if (preco != "") {
-          const produto = { nome, descricao, categoria, preco, imagem };
+          const produto = { nome, descricao, categoria, preco, imagemUrl };
           console.log(produto);
-          setAlertClass("mb-3 mt-2");
-          setAlertVariant("success");
-          setAlertMensagem("Produto cadastrado com sucesso");
-          alert("login efetuado com sucesso");
-          navigate("/home");
+          try {
+            const req = await fetch(urlProds, {
+              method: "POST",
+              headers: { "Content-type": "application/json" },
+              body: JSON.stringify(produto),
+            });
+            const res = req.json();
+            console.log(res);
+            setAlertClass("mb-3 mt-2");
+            setAlertVariant("success");
+            setAlertMensagem("Produto cadastrado com sucesso");
+            alert("login efetuado com sucesso");
+            // navigate("/home");
+          } catch (error) {
+            console.log(error);
+          }
         } else {
           setAlertClass("mb-3 mt-2");
           setAlertMensagem("O campo preço não pode ser vazio");
@@ -83,7 +93,6 @@ const CadastroProduto = () => {
       setAlertMensagem("O campo nome não pode ser vazio");
     }
   };
-
   return (
     <div>
       <NavBarra />
@@ -122,7 +131,12 @@ const CadastroProduto = () => {
               {/* select de categoria */}
               <Form.Group controlId="formGridTipo" className="mb-3">
                 <Form.Label>Tipo de produto</Form.Label>
-                <Form.Select>
+                <Form.Select
+                  value={categoria}
+                  onChange={(e) => {
+                    setCategoria(e.target.value);
+                  }}
+                >
                   {cats.map((cats) => (
                     <option key={cats.id} value={cats.nome}>
                       {cats.nome}
@@ -157,11 +171,17 @@ const CadastroProduto = () => {
                   <Form.Control
                     type="text"
                     placeholder="Envie o link da imagem do produto"
-                    value={imagem}
-                  onChange={(e) => setImagem(e.target.value)}
+                    value={imagemUrl}
+                    onChange={(e) => setImagemUrl(e.target.value)}
+                    
                   />
                 </FloatingLabel>
-                <Image src={imagem == "" ? linkImagem: imagem} rounded width={300} height={300} />
+                <Image
+                  src={imagemUrl == "" ? linkImagem : imagemUrl}
+                  rounded
+                  width={300}
+                  height={300}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -173,7 +193,7 @@ const CadastroProduto = () => {
 
           {/* Botão para enviar o formulario de cadastro de produto */}
 
-          <Button variant="primary" size="lg" type="submit">
+          <Button variant="primary" size="lg" type="submit" >
             Cadastrar
           </Button>
         </form>
