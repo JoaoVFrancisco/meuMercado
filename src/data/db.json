@@ -51,6 +51,14 @@
       "categoria": "Alimentos e Bebidas",
       "preco": "21",
       "imagemUrl": "https://cdn.awsli.com.br/600x450/1348/1348550/produto/110281136/753120d2fd.jpg"
+    },
+    {
+      "id": "ea74",
+      "nome": "pesego",
+      "descricao": "fruta gostosa",
+      "categoria": "Alimentos e Bebidas",
+      "preco": "13",
+      "imagemUrl": "https://cdn.awsli.com.br/600x450/1348/1348550/produto/110281136/753120d2fd.jpg"
     }
   ],
   "cats": [
