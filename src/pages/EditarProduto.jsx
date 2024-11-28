@@ -75,7 +75,7 @@ const EditarProduto = () => {
       }
     }
     fetchData()
-  })
+  }, [])
 
 
   //  Função pra lidar com o envio dos dados
@@ -97,8 +97,8 @@ const EditarProduto = () => {
             console.log(res);
             setAlertClass("mb-3 mt-2");
             setAlertVariant("success");
-            setAlertMensagem("Produto cadastrado com sucesso");
-            alert("login efetuado com sucesso");
+            setAlertMensagem("Produto editado com sucesso");
+            alert("Produto editado com sucesso");
             // navigate("/home");
           } catch (error) {
             console.log(error);

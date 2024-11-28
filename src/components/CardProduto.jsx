@@ -34,7 +34,7 @@ const CardProduto = (props) => {
             <b> Categoria: </b> <br></br> {props.categoria}
           </Card.Text>
 
-          <Card.Link href="/">
+          <Card.Link href={`/produto/editar/${props.id}`}>
             <Button variant="info">Editar</Button>
           </Card.Link>
 

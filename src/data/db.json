@@ -21,12 +21,12 @@
   ],
   "produtos": [
     {
-      "id": "1",
       "nome": "Shampoo Cr7",
       "descricao": "Melhor Shampoo do mundo",
+      "categoria": "Saúde e Beleza",
       "preco": 7.77,
-      "categoria": "Saúde e beleza",
-      "imagemUrl": "https:images-americanas.b2w.io/produtos/2473557992/imagens/shampoo-anticaspa-clear-men-sports-limpeza-profunda-200ml/2473557992_2_large.jpg"
+      "imagemUrl": "https:images-americanas.b2w.io/produtos/2473557992/imagens/shampoo-anticaspa-clear-men-sports-limpeza-profunda-200ml/2473557992_2_large.jpg",
+      "id": "1"
     },
     {
       "id": "2",
